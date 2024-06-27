@@ -5,7 +5,10 @@ part 'task_list_model.g.dart';
 
 @JsonSerializable()
 class TaskListModel extends Equatable {
-  const TaskListModel({required this.id, required this.name});
+  const TaskListModel({
+    required this.id,
+    required this.name,
+  });
 
   final String id;
   final String name;
@@ -30,5 +33,8 @@ class TaskListModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [
+        id,
+        name,
+      ];
 }
