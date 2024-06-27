@@ -1,7 +1,37 @@
-import 'package:tasklist_backend/datasource/list_datasource.dart';
+import 'package:tasklist_backend/extensions/hash_extension.dart';
+import 'package:tasklist_backend/model/task_list_model.dart';
 
 class ListRepository {
-  const ListRepository({required this.datasource});
+  
+  const ListRepository({this.listDb = const {}});
+  
+  final Map<String, TaskListModel> listDb;
 
-  final ListDatasource datasource;
+  Future<TaskListModel?> getListById(String id) async {
+    return listDb[id];
+  }
+
+  Map<String, dynamic> getAllLists() {
+    return listDb.map((key, value) => MapEntry(key, value.toJson()));
+  }
+
+  String createList({required String name}) {
+    final hashValue = name.hashValue;
+    listDb[hashValue] = TaskListModel(id: hashValue, name: name);
+    return hashValue;
+  }
+
+  void deleteList(String id) {
+    listDb.remove(id);
+  }
+
+  void updateList({required String id, required String name}) {
+    final list = listDb[id];
+
+    if (list == null) {
+      throw Exception('List not found');
+    }
+
+    listDb[id] = TaskListModel(id: id, name: name);
+  }
 }
