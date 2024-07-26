@@ -8,7 +8,7 @@ Handler middleware(Handler handler) {
       Endpoint(
         host: Env.postgresDbHost,
         database: Env.postgresDbName,
-        username: Env.postgresDbName,
+        username: Env.postgresDbUsername,
         password: Env.postgresDbPassword,
       ),
       settings: const ConnectionSettings(sslMode: SslMode.disable),
