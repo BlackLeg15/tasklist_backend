@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:postgres/postgres.dart';
-import 'package:tasklist_backend/extensions/hash_extension.dart';
 
 Future<Response> onRequest(RequestContext context) {
   return switch (context.request.method) {
@@ -15,19 +14,6 @@ Future<Response> onRequest(RequestContext context) {
 }
 
 Future<Response> _createList(RequestContext context) async {
-  final lists = <Map<String, dynamic>>[];
-  final results = await context.read<Connection>().execute(
-        'SELECT id, name FROM lists',
-      );
-
-  for (final row in results) {
-    lists.add({'id': row[0], 'name': row[1]});
-  }
-
-  return Response.json(body: lists.toString());
-}
-
-Future<Response> _getLists(RequestContext context) async {
   final body = await context.request.json() as Map<String, dynamic>;
 
   final name = body['name'] as String?;
@@ -40,4 +26,17 @@ Future<Response> _getLists(RequestContext context) async {
   } else {
     return Response.json(body: {'success': false});
   }
+}
+
+Future<Response> _getLists(RequestContext context) async {
+  final lists = <Map<String, dynamic>>[];
+  final results = await context.read<Connection>().execute(
+        'SELECT id, name FROM lists',
+      );
+
+  for (final row in results) {
+    lists.add({'id': row[0], 'name': row[1]});
+  }
+
+  return Response.json(body: lists.toString());
 }

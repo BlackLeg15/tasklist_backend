@@ -5,7 +5,7 @@ import 'package:tasklist_backend/env.dart';
 Handler middleware(Handler handler) {
   return (context) async {
     final db = await Db.create(
-      'mongodb+srv://${Env.dbUsername}:${Env.dbPassword}@${Env.dbHost}/${Env.dbName}?retryWrites=true&w=majority',
+      'mongodb+srv://${Env.mongoDbUsername}:${Env.mongoDbPassword}@${Env.mongoDbHost}/${Env.mongoDbName}?retryWrites=true&w=majority',
     );
     if (!db.isConnected) {
       await db.open();

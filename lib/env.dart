@@ -5,11 +5,19 @@ part 'env.g.dart';
 @Envied(path: '.env')
 abstract class Env {
     @EnviedField()
-    static const String dbUsername = _Env.dbUsername;
+    static const String mongoDbUsername = _Env.mongoDbUsername;
     @EnviedField()
-    static const String dbPassword = _Env.dbPassword;
+    static const String mongoDbPassword = _Env.mongoDbPassword;
     @EnviedField()
-    static const String dbHost = _Env.dbHost;
+    static const String mongoDbHost = _Env.mongoDbHost;
     @EnviedField()
-    static const String dbName = _Env.dbName;
+    static const String mongoDbName = _Env.mongoDbName;
+    @EnviedField()
+    static const String postgresDbUsername = _Env.postgresDbUsername;
+    @EnviedField()
+    static const String postgresDbPassword = _Env.postgresDbPassword;
+    @EnviedField()
+    static const String postgresDbHost = _Env.postgresDbHost;
+    @EnviedField()
+    static const String postgresDbName = _Env.postgresDbName;
 }
