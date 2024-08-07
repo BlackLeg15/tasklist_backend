@@ -1,5 +1,6 @@
 import 'package:dart_frog/dart_frog.dart';
 import 'package:redis/redis.dart';
+import 'package:tasklist_backend/env.dart';
 
 final conn = RedisConnection();
 
@@ -8,9 +9,13 @@ Handler middleware(Handler handler) {
     late final Response response;
 
     try {
-      final command = await conn.connect('localhost', 6379);
+      final command = await conn.connect(Env.redisHost, Env.redisPort);
       try {
-        await command.send_object(['AUTH', 'default', 'test']);
+        await command.send_object([
+          'AUTH',
+          Env.redisUsername,
+          Env.redisPassword,
+        ]);
         response = await handler
             .use(
               provider<Command>((_) => command),
