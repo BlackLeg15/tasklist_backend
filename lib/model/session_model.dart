@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// A session class
-class SessionModel {
+class SessionModel extends Equatable {
   /// Constructor
   const SessionModel({
     required this.token,
@@ -19,4 +21,7 @@ class SessionModel {
   
   /// When this session was created
   final DateTime createdAt;
+  
+  @override
+  List<Object?> get props => [token, userId, expiryDate, createdAt];
 }
