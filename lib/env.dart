@@ -5,6 +5,8 @@ part 'env.g.dart';
 @Envied(path: '.env')
 abstract class Env {
     @EnviedField()
+    static const String firebaseProjectId = _Env.firebaseProjectId;
+    @EnviedField()
     static const String mongoDbUsername = _Env.mongoDbUsername;
     @EnviedField()
     static const String mongoDbPassword = _Env.mongoDbPassword;
